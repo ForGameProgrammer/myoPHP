@@ -1,6 +1,6 @@
 <HTML>
 <Head>
-    <meta http-equiv="Content-Type" content="text/HTML; charset=utf-8" />
+    <meta charset="UTF-8"/>
 </Head>
 <Body>
 <?php
@@ -15,6 +15,7 @@ if ($db->connect_error)
     die(json_encode($json));
 }
 
+$db->query("SET NAMES UTF8");
 
 $tablo = DB_TABLO;
 $sorgu = $db->prepare("Select * from $tablo");
