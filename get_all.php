@@ -1,3 +1,8 @@
+<HTML>
+<Head>
+    <meta http-equiv="Content-Type" content="text/HTML; charset=utf-8" />
+</Head>
+<Body>
 <?php
 require "degiskenler.php";
 $json = array();
@@ -38,3 +43,5 @@ else
 }
 
 ?>
+</Body>
+</HTML>
