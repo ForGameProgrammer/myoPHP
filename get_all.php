@@ -1,9 +1,5 @@
-<HTML>
-<Head>
-    <meta charset="UTF-8"/>
-</Head>
-<Body>
 <?php
+header('Content-Type: text/html; charset=utf-8');
 require "degiskenler.php";
 $json = array();
 
@@ -37,6 +33,7 @@ else
         $duyuru["mesaj"] = $row["mesaj"];
         $duyuru["tarih"] = $row["tarih"];
         $duyuru["yazar"] = $row["yazar"];
+        $duyuru["link"] = $row["link"];
         array_push($json["duyurular"], $duyuru);
     }
     $json["basarili"] = 1;
@@ -44,5 +41,3 @@ else
 }
 
 ?>
-</Body>
-</HTML>
