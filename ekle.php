@@ -16,16 +16,7 @@
     </style>
 </Head>
 <Body>
-<?php
-/*
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    echo "Dead";
-}
-*/
 
-    print_r($_POST);
-?>
 
 <Form method="POST">
     <div style="background: #7bff00;" class="kutu1">
@@ -34,6 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <input type="submit" name="dersekle" value="Ders Ekle"/>
         <br>
         <p id="dersyazi"></p>
+        <?php
+
+        if (isset($_POST["dersekle"]))
+        {
+            echo "Heil";
+        }
+
+        ?>
     </div>
 </Form>
 
