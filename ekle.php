@@ -67,6 +67,7 @@ require "degiskenler.php";
     $sqlders = $db->prepare("SELECT * FROM " . TABLO_DERSLER);
     $sqlders->execute();
     $sonucders = $sqlders->get_result();
+    $optiondersler .= "<option value=''></option>";
     while ($dersler = $sonucders->fetch_array())
     {
         $optiondersler .= "<option value={$dersler['ID']}>{$dersler['ders']}</option>";
@@ -76,6 +77,7 @@ require "degiskenler.php";
     $sqlogretmenler = $db->prepare("SELECT * FROM " . TABLO_OGRETMENLER);
     $sqlogretmenler->execute();
     $sonucogretmenler = $sqlogretmenler->get_result();
+    $optionogretmenler .= "<option value=''></option>";
     while ($ogretmenler = $sonucogretmenler->fetch_array())
     {
         $optionogretmenler .= "<option value={$ogretmenler['ID']}>{$ogretmenler['ogretmenadi']}</option>";
@@ -85,6 +87,7 @@ require "degiskenler.php";
     $sqlsiniflar = $db->prepare("SELECT * FROM " . TABLO_SINIFLAR);
     $sqlsiniflar->execute();
     $sonucsiniflar = $sqlsiniflar->get_result();
+    $optionsiniflar .= "<option value=''></option>";
     while ($siniflar = $sonucsiniflar->fetch_array())
     {
         $optionsiniflar .= "<option value={$siniflar['ID']}>{$siniflar['sinifadi']}</option>";
