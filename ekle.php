@@ -49,7 +49,7 @@ require "degiskenler.php";
 
         if (isset($_POST["ogretmenekle"]))
         {
-            $ogretmenadi = $_POST["dersadi"];
+            $ogretmenadi = $_POST["ogretmenadi"];
             $sql = $db->prepare("INSERT INTO " . TABLO_OGRETMENLER . " (" . TABLO_OGRETMENLER_AD . ") VALUES(?)");
             $sql->bind_param("s", $ogretmenadi);
             $sql->execute();
