@@ -26,4 +26,5 @@ define("TABLO_PROGRAM_GUN","gun");
 define("TABLO_PROGRAM_DERSSIRA","derssira");
 define("TABLO_PROGRAM_OGRETMENID","ogretmenID");
 define("TABLO_PROGRAM_SINIFID","sinifID");
+define("TABLO_PROGRAM_YER","yer");
 ?>
