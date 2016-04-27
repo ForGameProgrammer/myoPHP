@@ -13,7 +13,7 @@ if ($db->connect_error)
 
 $db->query("SET NAMES UTF8");
 
-$tablo = DB_TABLO;
+$tablo = TABLO_DUYURU;
 $sorgu = $db->prepare("Select * from $tablo");
 $sorgu->execute();
 $sonuc = $sorgu->get_result();
@@ -29,11 +29,11 @@ else
     while ($row = $sonuc->fetch_array())
     {
         $duyuru = array();
-        $duyuru["id"] = $row["id"];
-        $duyuru["mesaj"] = $row["mesaj"];
-        $duyuru["tarih"] = $row["tarih"];
-        $duyuru["yazar"] = $row["yazar"];
-        $duyuru["link"] = $row["link"];
+        $duyuru[TABLO_DUYURU_ID] = $row[TABLO_DUYURU_ID];
+        $duyuru[TABLO_DUYURU_MESAJ] = $row[TABLO_DUYURU_MESAJ];
+        $duyuru[TABLO_DUYURU_TARIH] = $row[TABLO_DUYURU_TARIH];
+        $duyuru[TABLO_DUYURU_YAZAR] = $row[TABLO_DUYURU_YAZAR];
+        $duyuru[TABLO_DUYURU_LINK] = $row[TABLO_DUYURU_LINK];
         array_push($json["duyurular"], $duyuru);
     }
     $json["basarili"] = 1;
