@@ -8,29 +8,31 @@ $json = array();
 //Öğretmenler
 //Program
 
-$db = @new mysqli(DB_HOST, DB_KULLANICI, DB_SIFRE, DB_VERITABANI);
-if ($db->connect_error)
+$veritabani = @new mysqli(DB_HOST, DB_KULLANICI, DB_SIFRE, DB_VERITABANI);
+if ($veritabani->connect_error)
 {
     $json["basarili"] = 0;
     $json["hata"] = "Veri Tabanına Bağlanılamadı.";
     die(json_encode($json));
 }
-$db->query("SET NAMES UTF8");
 
-$sorgu = $db->prepare("Select * from " . TABLO_DERS);
-$sorgu->execute();
+$sorgu = $veritabani->prepare("SELECT * FROM " . TABLO_DERSLER);
+if (!$sorgu) {
+    die("hata");
+}
+$sorgu ->execute();
 $sonuc = $sorgu->get_result();
 $json["dersler"] = array();
 while ($row = $sonuc->fetch_array())
 {
     $ders = array();
-    $ders[TABLO_DERSLER_ID] = $row[TABLO_DERSLER_ID];
+    $ders[TABLO_DERSLER_ID]   = $row[TABLO_DERSLER_ID];
     $ders[TABLO_DERSLER_DERS] = $row[TABLO_DERSLER_DERS];
     array_push($json["dersler"], $ders);
 }
 
-$sorgu = $db->prepare("Select * from " . TABLO_SINIF);
-$sorgu->execute();
+$sorgu = $veritabani->prepare("SELECT * FROM " . TABLO_SINIFLAR);
+$sorgu ->execute();
 $sonuc = $sorgu->get_result();
 $json["siniflar"] = array();
 while ($row = $sonuc->fetch_array())
@@ -42,8 +44,8 @@ while ($row = $sonuc->fetch_array())
     array_push($json["siniflar"], $sinif);
 }
 
-$sorgu = $db->prepare("Select * from " . TABLO_OGRETMENLER);
-$sorgu->execute();
+$sorgu = $veritabani->prepare("SELECT * FROM " . TABLO_OGRETMENLER);
+$sorgu ->execute();
 $sonuc = $sorgu->get_result();
 $json["ogretmenler"] = array();
 while ($row = $sonuc->fetch_array())
@@ -54,8 +56,8 @@ while ($row = $sonuc->fetch_array())
     array_push($json["ogretmenler"], $ogretmen);
 }
 
-$sorgu = $db->prepare("Select * from " . TABLO_PROGRAM);
-$sorgu->execute();
+$sorgu = $veritabani->prepare("SELECT * FROM " . TABLO_PROGRAM);
+$sorgu ->execute();
 $sonuc = $sorgu->get_result();
 $json["program"] = array();
 while ($row = $sonuc->fetch_array())
@@ -71,6 +73,7 @@ while ($row = $sonuc->fetch_array())
     array_push($json["program"], $prog);
 }
 
+$veritabani->close();
 $json["basarili"] = 1;
 echo json_encode($json);
 
