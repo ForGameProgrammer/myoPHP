@@ -14,7 +14,7 @@ if ($db->connect_error)
 $db->query("SET NAMES UTF8");
 
 $tablo = TABLO_DUYURU;
-$sorgu = $db->prepare("Select * from $tablo");
+$sorgu = $db->prepare("Select * from " . TABLO_DUYURU);
 $sorgu->execute();
 $sonuc = $sorgu->get_result();
 if ($sonuc->num_rows < 1)

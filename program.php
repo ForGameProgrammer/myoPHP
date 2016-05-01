@@ -15,7 +15,6 @@ if ($db->connect_error)
     $json["hata"] = "Veri Tabanına Bağlanılamadı.";
     die(json_encode($json));
 }
-
 $db->query("SET NAMES UTF8");
 
 $sorgu = $db->prepare("Select * from " . TABLO_DERS);
