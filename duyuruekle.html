@@ -5,6 +5,29 @@
     <title>Duyuru Ekle</title>
 </head>
 <body>
-
+<FORM id="formduyuru" method="POST" action="duyuru_ekle.php">
+	<input type ="TEXT" name="mesaj" id="mesaj" placeholder="Duyuru Mesajı" /><BR/>
+	<input type ="DATE" name="tarih" id="tarih" placeholder="Tarih" /><BR/>
+	<input type ="TEXT" name="yazar" id="yazar" placeholder="Yazan Kişi" /><BR/>
+	<input type ="TEXT" name="link"  id="link"  placeholder="Link (Boş Olabilir)" /><BR/>
+	<input type ="BUTTON" id="gonder" value="KAYDET" />
+</FORM>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var hatamesaj = "Lütfen Boşlukları Dolduralım... Sağlı Sollu...";
+		$("#gonder").click(function(){
+			if ($("#mesaj").val().trim() == "") {
+				alert(hatamesaj);
+			}else if ($("#tarih").val().trim() == "") {
+				alert(hatamesaj);
+			}else if ($("#yazar").val().trim() == "") {
+				alert(hatamesaj);
+			}else{
+				$("#formduyuru").submit();
+			}
+		});
+	});
+</script>
 </body>
 </html>

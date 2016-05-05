@@ -27,4 +27,7 @@ define("TABLO_PROGRAM_DERSSIRA","derssira");
 define("TABLO_PROGRAM_OGRETMENID","ogretmenID");
 define("TABLO_PROGRAM_SINIFID","sinifID");
 define("TABLO_PROGRAM_YER","yer");
+define("TABLO_CIHAZLAR","cihazlar");
+define("TABLO_CIHAZLAR_ID","ID");
+define("TABLO_CIHAZLAR_CIHAZID","cihazID");
 ?>
