@@ -3,15 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Duyuru Ekle</title>
+    <style type="text/css">
+    	div{
+    		padding: 20px;
+    		margin: auto;
+    		width: 40%;
+    	}
+    	input{
+    		border: none;
+    		font-size: 36px;
+    		padding: 10px;
+    		margin: 10px;
+    		border-left: 6px solid #000;
+    		outline: none;
+    		background: #c8c8c8;
+    		width: 100%;
+    		transition: background 2s, border-left 2s;
+    	}
+    	input:focus{
+    		border-left: 6px solid #00f280;
+    		background: #fff;
+    	}
+    	button{
+    		border: none;
+    		font-size: 48px;
+    		padding: 10px;
+    		margin: 10px;
+    		outline: none;
+    		background: #fff;
+    		color: #00f280;
+    		transition: background 1s, color 1s;
+    		width: 250px;
+    	}
+    	button:hover{
+    		background: #00f280;
+    		color: #fff;
+    	}
+    </style>
 </head>
 <body>
+<div>
 <FORM id="formduyuru" method="POST" action="duyuru_ekle.php">
 	<input type ="TEXT" name="mesaj" id="mesaj" placeholder="Duyuru Mesajı" /><BR/>
 	<input type ="DATE" name="tarih" id="tarih" placeholder="Tarih" /><BR/>
 	<input type ="TEXT" name="yazar" id="yazar" placeholder="Yazan Kişi" /><BR/>
 	<input type ="TEXT" name="link"  id="link"  placeholder="Link (Boş Olabilir)" /><BR/>
-	<input type ="BUTTON" id="gonder" value="KAYDET" />
+	<button id="gonder">KAYDET</button>
 </FORM>
+</div>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {
