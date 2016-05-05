@@ -20,7 +20,7 @@ if (isset($_POST["mesaj"])) {
 	$sql->bind_param("ssss",$mesaj,$tarih,$yazar,$link);
 	$sql->execute();
 	echo "Duyurunuz Başarı ile Eklendi...";
-	sendMessageToAll($_POST["mesaj"]);
+	
 
 	//This function will actually send the notification
 function sendNotification($registrationIds, $message)
@@ -83,6 +83,7 @@ function sendMessageToAll($message){
 
     }
 }
+sendMessageToAll($_POST["mesaj"]);
 	$db->close();
 }
 ?>
