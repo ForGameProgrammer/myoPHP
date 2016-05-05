@@ -1,4 +1,5 @@
 <?php
+define("API_ACCESS_KEYS","AIzaSyBlJk03P4i8f4Lh6OsVtCnjijRR2_QaVKA");
 define("TABLO_DUYURU","duyuru");
 define("TABLO_DUYURU_ID","id");
 define("TABLO_DUYURU_MESAJ","mesaj");
