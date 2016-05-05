@@ -1,3 +1,8 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/HTML; charset=utf-8" />
+</HEAD>
+<BODY>
 <?php  
 require "degiskenler.php";
 
@@ -20,7 +25,7 @@ if (isset($_POST["mesaj"])) {
 	$sql->bind_param("ssss",$mesaj,$tarih,$yazar,$link);
 	$sql->execute();
 	echo "Duyurunuz Başarı ile Eklendi...";
-	
+	$db->close();
 
 	//This function will actually send the notification
 function sendNotification($registrationIds, $message)
@@ -63,12 +68,13 @@ function sendNotification($registrationIds, $message)
 }
 
 function sendMessageToAll($message){
-    $sql = $db->prepare("SELECT * FROM " . TABLO_CIHAZLAR);
-    if (!$sql) {
+	$vt = @new mysqli(DB_HOST,DB_KULLANICI,DB_SIFRE,DB_VERITABANI);
+    $ssqqll = $vt->prepare("SELECT * FROM " . TABLO_CIHAZLAR);
+    if (!$ssqqll) {
         die("SQL HATASI!");
     }
-    $sql->execute();
-    $sonuc=$sql->get_result();
+    $ssqqll->execute();
+    $sonuc=$ssqqll->get_result();
 
     $gcmRegIds = array();
     while($query_row = $sonuc->fetch_array()) {
@@ -84,6 +90,8 @@ function sendMessageToAll($message){
     }
 }
 sendMessageToAll($_POST["mesaj"]);
-	$db->close();
+	
 }
 ?>
+</BODY>
+</HTML>
