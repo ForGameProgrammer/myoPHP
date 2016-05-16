@@ -24,13 +24,13 @@ if ($sonuc->num_rows < 1) {
 	$sonuc1 = $sonuc->fetch_array();
 	if (isset($_POST["hatirla"])) {
 		/* Set cookie to last 1 year */
-		setcookie($COOKIE1, $sonuc1[TABLO_UYELER_ID], time() + 60 * 60 * 24 * 365);
-		setcookie($COOKIE2, md5($sifre), time() + 60 * 60 * 24 * 365);
+		setcookie(COOKIE1, $sonuc1[TABLO_UYELER_ID], time() + 60 * 60 * 24 * 365);
+		setcookie(COOKIE2, md5($sifre), time() + 60 * 60 * 24 * 365);
 
 	} else {
 		/* Cookie expires when browser closes */
-		setcookie($COOKIE1, $sonuc1[TABLO_UYELER_ID], false);
-		setcookie($COOKIE2, md5($sifre), false);
+		setcookie(COOKIE1, $sonuc1[TABLO_UYELER_ID], false);
+		setcookie(COOKIE2, md5($sifre), false);
 	}
 	header('Location: index.php');
 }
