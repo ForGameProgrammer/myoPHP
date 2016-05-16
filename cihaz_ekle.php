@@ -1,6 +1,7 @@
 <?php  
 require "degiskenler.php";
 
+
 if (isset($_POST["cihaz"])) {
 	$db = @new mysqli(DB_HOST,DB_KULLANICI,DB_SIFRE,DB_VERITABANI);
 	if ($db->connect_error) {
@@ -30,4 +31,5 @@ if (isset($_POST["cihaz"])) {
 
 	$db->close();
 }
+
 ?>

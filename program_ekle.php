@@ -107,6 +107,9 @@
     <p>Durum:
     <?php
 require "degiskenler.php";
+require "kontrol.php";
+
+yokEt();
 
 $db = @new mysqli(DB_HOST, DB_KULLANICI, DB_SIFRE, DB_VERITABANI);
 if ($db->connect_error) {

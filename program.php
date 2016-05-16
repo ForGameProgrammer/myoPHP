@@ -1,6 +1,12 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 require "degiskenler.php";
+require "kontrol.php";
+
+yokEt();
+
+
+//Array json için
 $json = array();
 
 //Dersler

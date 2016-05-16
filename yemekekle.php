@@ -54,6 +54,11 @@
     </style>
 </head>
 <body>
+<?php  
+require "kontrol.php";
+
+yokEt();
+?>
 <div>
 <img src="kmyomobil.png" width="256" height="256">
 <FORM id="formduyuru" method="POST" action="yemek_ekle.php">

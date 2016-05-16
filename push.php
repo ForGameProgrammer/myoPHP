@@ -6,6 +6,9 @@
 <?php
 //Define your GCM server key here
 require "degiskenler.php";
+require "kontrol.php";
+
+yokEt();
 
 //This function will actually send the notification
 function sendNotification($registrationIds, $message) {

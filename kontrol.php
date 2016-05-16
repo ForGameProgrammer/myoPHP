@@ -1,5 +1,5 @@
 <?php 
-require "degiskenler.php"
+require "degiskenler.php";
 
 function cookieKontrol()
 {
@@ -25,13 +25,16 @@ function dbKontrol()
 	return  $sqlsorgusonucurows < 1 ? false : true;
 }
 
+function kontrolEt()
+{
+	return dbKontrol();
+}
+
 function yokEt()
 {
 	if (!dbKontrol()) {
 		die("Giriş Yapmalısınız.")
 	}
 }
-
-
 
 ?>

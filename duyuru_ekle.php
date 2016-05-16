@@ -5,6 +5,9 @@
 <BODY>
 <?php
 require "degiskenler.php";
+require "kontrol.php";
+
+yokEt();
 
 if (isset($_POST["mesaj"])) {
 	$db = @new mysqli(DB_HOST, DB_KULLANICI, DB_SIFRE, DB_VERITABANI);

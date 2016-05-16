@@ -56,7 +56,7 @@
 <body>
 <div>
 <img src="kmyomobil.png" width="256" height="256">
-<FORM id="formduyuru" method="POST" action="onay>.php">
+<FORM id="formduyuru" method="POST" action="onay.php">
 	<input type ="TEXT"        name="kadi"    placeholder="Kullanıcı Adı" /><BR/>
     <input type ="PASSWORD"    name="sifre"   placeholder="Şifre" /><BR/>
 	<label>
