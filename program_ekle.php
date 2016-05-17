@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Dosis:500' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+        function Refresh(value) {
+        URL = window.location.href.split("?")[0];
+        window.location.replace(URL + "?sinif=" + value);
+        }
+    </script>
     <style>
         html,body{
             font-family: 'Dosis', sans-serif;
@@ -169,7 +175,9 @@ $sqlders = $db->prepare("SELECT * FROM " . TABLO_DERSLER);
 $sqlders->execute();
 $sonucders = $sqlders->get_result();
 $optiondersler .= "<option value=''></option>";
+$denemedersler = array();
 while ($dersler = $sonucders->fetch_array()) {
+    array_push($denemedersler,$dersler);
 	$optiondersler .= "<option value={$dersler['ID']}>{$dersler['ders']}</option>";
 }
 
@@ -178,8 +186,18 @@ $sqlogretmenler = $db->prepare("SELECT * FROM " . TABLO_OGRETMENLER);
 $sqlogretmenler->execute();
 $sonucogretmenler = $sqlogretmenler->get_result();
 $optionogretmenler .= "<option value=''></option>";
+$denemeogretmenler = array();
 while ($ogretmenler = $sonucogretmenler->fetch_array()) {
+    array_push($denemeogretmenler,$ogretmenler);
 	$optionogretmenler .= "<option value={$ogretmenler['ID']}>{$ogretmenler['ogretmenadi']}</option>";
+}
+$getsinif = $_GET["sinif"];
+if (isset($getsinif)) 
+{
+    $sqldeneme = $db->prepare("SELECT * FROM " . TABLO_PROGRAM . " WHERE " . TABLO_PROGRAM_SINIFID . "=?");  
+    $sqldeneme->bind_param("i",$getsinif);
+    $sqldeneme->execute();
+    $sonucdeneme = $sqldeneme->get_result();
 }
 
 $optionsiniflar = "";
@@ -187,12 +205,19 @@ $sqlsiniflar = $db->prepare("SELECT * FROM " . TABLO_SINIFLAR);
 $sqlsiniflar->execute();
 $sonucsiniflar = $sqlsiniflar->get_result();
 while ($siniflar = $sonucsiniflar->fetch_array()) {
-	$optionsiniflar .= "<option value={$siniflar['ID']}>{$siniflar['sinifadi']} {$siniflar['ogretim']}.Öğretim</option>";
+    if ($getsinif == $siniflar[TABLO_SINIFLAR_ID]) {
+        $optionsiniflar .= "<option value='{$siniflar['ID']}' selected>{$siniflar['sinifadi']} {$siniflar['ogretim']}.Öğretim</option>";
+    }
+	else
+    {
+        $optionsiniflar .= "<option value='{$siniflar['ID']}'>{$siniflar['sinifadi']} {$siniflar['ogretim']}.Öğretim</option>";
+    } 
 }
 
-$db->close();
+
 
 ?>
+
     </p>
     </div>
 </div>
@@ -241,7 +266,7 @@ $db->close();
     <div class="container program">
     <div class="row">
     <div class="col-md-12">
-        <div><p class="text-center siniflar"><strong>Sınıf : </strong><Select name="sinif"><?php echo $optionsiniflar; ?></p></Select>
+        <div><p class="text-center siniflar"><strong>Sınıf : </strong><Select name="sinif" onChange="Refresh(this.value)"><?php echo $optionsiniflar; ?></p></Select>
             <input type="submit"
                     class="gonder"
                    name="programgonder"
@@ -266,13 +291,53 @@ for ($i = 1; $i <= 45; $i++) {
 		echo "<Tr><Th>$saat1:15-$saat2:00</Th>";
 	}
 
-	echo "<Td>
-                      <Select class='giris2' name='ders$i'>$optiondersler</Select>
+    $gun = $i % 5 == 0 ? 5 : $i % 5;
+    $derssira = (int) ($i / 5);
+    if ($i % 5 != 0) $derssira++;
+    $denemedersoption = "";
+    $denemeogretmenoption ="";
+    $denemeyer = "";
+    while ($itemdeneme = $sonucdeneme->fetch_array()) 
+    {
+        if ($itemdeneme[TABLO_PROGRAM_GUN] == $gun && $itemdeneme[TABLO_PROGRAM_DERSSIRA] == $derssira) 
+        {
+            foreach ($denemedersler as $dersler) 
+            {
+
+                if ($dersler[TABLO_DERSLER_ID] == $itemdeneme[TABLO_PROGRAM_DERSID]) 
+                {
+                    $denemedersadi = $dersler[TABLO_DERSLER_DERS];
+                    $denemedersid = $dersler[TABLO_DERSLER_ID];
+                    $denemedersoption = "<option value='$denemedersid' selected>$denemedersadi</option>";
+                    break;
+                }
+            }
+
+            foreach ($denemeogretmenler as $ogretmenler) 
+            {
+                if ($ogretmenler[TABLO_OGRETMENLER_ID] == $itemdeneme[TABLO_PROGRAM_OGRETMENID]) {
+                    $denemeogretmenadi = $ogretmenler[TABLO_OGRETMENLER_AD];
+                    $denemeogretmenid =  $ogretmenler[TABLO_OGRETMENLER_ID];
+                    $denemeogretmenoption = "<option value='$denemeogretmenid' selected>$denemeogretmenadi</option>";
+                    break;
+                }
+            }
+            $denemeyer = $itemdeneme[TABLO_PROGRAM_YER];
+            break;
+        }
+    }
+	echo "<Td><Select class='giris2' name='ders$i'>";
+    echo $denemedersoption;
+    echo "$optiondersler</Select>
                       <br/>
-                      <Select class='giris2' name='ogretmen$i'>$optionogretmenler</Select>
-                      <br/>
-                      <input type='text' placeholder='Ders Yeri' name='yer$i'/>
-                      </Td>";
+                      <Select class='giris2' name='ogretmen$i'>";
+     echo $denemeogretmenoption;
+    echo "$optionogretmenler</Select>
+                      <br/>";
+    
+        echo "<input type='text' placeholder='Ders Yeri' name='yer$i' value='$denemeyer'/>";
+  
+    echo "</Td>";
 
 	if ($i % 5 == 0) {
 		echo "</Tr>";
@@ -287,6 +352,8 @@ for ($i = 1; $i <= 45; $i++) {
 
 </Form>
 
-
+<?php 
+$db->close();
+?>
 </Body>
 </HTML>

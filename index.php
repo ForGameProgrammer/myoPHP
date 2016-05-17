@@ -51,11 +51,30 @@
             background: #FF9C00;
             color: #fff;
         }
+        h1{
+            color: #fff;
+        }
     </style>
 </head>
 <body>
 <div>
 <img src="kmyomobil.png" width="256" height="256">
+<?php  
+require "kontrol.php";
+
+if (kontrolEt()) 
+{
+?>
+
+<h1>
+Hoşgeldiniz
+</h1>
+<p><a href="logout.php">Çıkış</a></p>
+
+<?php
+}else
+{
+?>
 <FORM id="formduyuru" method="POST" action="onay.php">
 	<input type ="TEXT"        name="kadi"    placeholder="Kullanıcı Adı" /><BR/>
     <input type ="PASSWORD"    name="sifre"   placeholder="Şifre" /><BR/>
@@ -65,6 +84,9 @@
     <BR/>
 	<button type ="SUBMIT">GİRİŞ</button>
 </FORM>
+<?php 
+}
+?>
 </div>
 </body>
 </html>

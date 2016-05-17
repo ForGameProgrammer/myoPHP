@@ -33,7 +33,7 @@ function kontrolEt()
 function yokEt()
 {
 	if (!dbKontrol()) {
-		die("Giriş Yapmalısınız.")
+		die("Giriş Yapmalısınız.");
 	}
 }
 
